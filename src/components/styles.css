@@ -1,0 +1,13 @@
+.color-nav {
+  background-color: rgb(209, 230, 224);
+}
+
+.color-card {
+  width: "400px";
+  height: "400px";
+  borderradius: "16px";
+  marginright: "24px";
+  padding: "20px 40px";
+  boxshadow: "5px 8px 24px 5px rgba(208, 216, 243, 0.6)";
+  background-color: rgb(209, 230, 224);
+}
