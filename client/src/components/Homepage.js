@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Howl, Howler } from "howler";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import "./styles.css";
 import BackgroundCard from "./BackgroundCard";
+import audioOutput from "../audiofiles/output.mp3";
 
 function Homepage() {
   const [messageToTranslate, setMessageToTranslate] = useState();
@@ -14,6 +16,7 @@ function Homepage() {
     setTranslatedMessageInternational,
   ] = useState();
   const [translatedMessageGuide, setTranslatedMessageGuide] = useState();
+  // const [languageOfAudio, setLanguageOfAudio] = useState();
 
   async function handleTranslationRequestInternational(evt) {
     evt.preventDefault();
@@ -33,6 +36,7 @@ function Homepage() {
         );
         console.log("response.data=", response.data);
         setTranslatedMessageInternational(response.data);
+        //setLanguageOfAudio("en-US");
       })
       .catch((error) => {
         console.log("error in axios call! printing error...", error);
@@ -66,6 +70,16 @@ function Homepage() {
     setMessageToTranslate(evt.target.value);
   }
 
+  function handleClickedAudioButton() {
+    const sound = new Howl({
+      src: [audioOutput],
+    });
+    console.log("inside handleCLickedAudioButton...");
+
+    sound.play();
+  }
+  //Howler.volume(1.0);
+
   return (
     <Container fluid>
       <Row>
@@ -78,6 +92,8 @@ function Homepage() {
             translatedTextInternational={translatedMessageInternational}
             translatedTextGuide={translatedMessageGuide}
           />
+
+          <Button onClick={handleClickedAudioButton}>Testing audio...</Button>
         </Col>
         <Col>
           <br />
