@@ -9,7 +9,11 @@ import BackgroundCard from "./BackgroundCard";
 
 function Homepage() {
   const [messageToTranslate, setMessageToTranslate] = useState();
-  const [translatedMessage, setTranslatedMessage] = useState();
+  const [
+    translatedMessageInternational,
+    setTranslatedMessageInternational,
+  ] = useState();
+  const [translatedMessageGuide, setTranslatedMessageGuide] = useState();
 
   async function handleTranslationRequestInternational(evt) {
     evt.preventDefault();
@@ -28,7 +32,7 @@ function Homepage() {
           "inside Homepage, inside axios.get.then() callback, printing response..."
         );
         console.log("response.data=", response.data);
-        setTranslatedMessage(response.data);
+        setTranslatedMessageInternational(response.data);
       })
       .catch((error) => {
         console.log("error in axios call! printing error...", error);
@@ -51,7 +55,7 @@ function Homepage() {
           "inside Homepage, inside axios.get.then() callback, printing response..."
         );
         console.log("response.data=", response.data);
-        setTranslatedMessage(response.data);
+        setTranslatedMessageGuide(response.data);
       })
       .catch((error) => {
         console.log("error in axios call! printing error...", error);
@@ -71,7 +75,8 @@ function Homepage() {
             user="International"
             onTranslateRequest={handleTranslationRequestInternational}
             onNewText={handleOnNewText}
-            translatedText={translatedMessage}
+            translatedTextInternational={translatedMessageInternational}
+            translatedTextGuide={translatedMessageGuide}
           />
         </Col>
         <Col>
@@ -80,7 +85,8 @@ function Homepage() {
             user="Guide"
             onTranslateRequest={handleTranslationRequestGuide}
             onNewText={handleOnNewText}
-            translatedText={translatedMessage}
+            translatedTextGuide={translatedMessageGuide}
+            translatedTextInternational={translatedMessageInternational}
           />
         </Col>
       </Row>

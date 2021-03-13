@@ -28,7 +28,7 @@ function DialogueCard({ user, content }) {
   return (
     <Figure
       style={
-        user == "international" ? figureStyleInternational : figureStyleGuide
+        user == "International" ? figureStyleInternational : figureStyleGuide
       }
     >
       <div>{content}</div>
