@@ -16,6 +16,7 @@ function Homepage() {
     setTranslatedMessageInternational,
   ] = useState();
   const [translatedMessageGuide, setTranslatedMessageGuide] = useState();
+  const [audioAvailable, setAudioAvailable] = useState(false);
   // const [languageOfAudio, setLanguageOfAudio] = useState();
 
   async function handleTranslationRequestInternational(evt) {
@@ -36,6 +37,7 @@ function Homepage() {
         );
         console.log("response.data=", response.data);
         setTranslatedMessageInternational(response.data);
+        setAudioAvailable(true);
         //setLanguageOfAudio("en-US");
       })
       .catch((error) => {
@@ -70,7 +72,8 @@ function Homepage() {
     setMessageToTranslate(evt.target.value);
   }
 
-  function handleClickedAudioButton() {
+  function handleClickedAudioButton(evt) {
+    evt.preventDefault();
     const sound = new Howl({
       src: [audioOutput],
     });
@@ -91,9 +94,9 @@ function Homepage() {
             onNewText={handleOnNewText}
             translatedTextInternational={translatedMessageInternational}
             translatedTextGuide={translatedMessageGuide}
+            onAudioRequest={handleClickedAudioButton}
+            onAudioAvailable={audioAvailable}
           />
-
-          <Button onClick={handleClickedAudioButton}>Testing audio...</Button>
         </Col>
         <Col>
           <br />
@@ -103,6 +106,8 @@ function Homepage() {
             onNewText={handleOnNewText}
             translatedTextGuide={translatedMessageGuide}
             translatedTextInternational={translatedMessageInternational}
+            onAudioRequest={handleClickedAudioButton}
+            onAudioAvailable={audioAvailable}
           />
         </Col>
       </Row>

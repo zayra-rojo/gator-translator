@@ -18,7 +18,7 @@ const figureStyleBackground = {
   backgroundColor: "rgb(209, 230, 224)",
 };
 const figureStyleChat = {
-  // width: "500px",
+  width: "400px",
   // height: "600px",
   borderRadius: "16px",
   marginRight: "24px",
@@ -31,11 +31,6 @@ let internationalCardContent = "Yes, how do i get to Chomp It?";
 
 function BackgroundCard(props) {
   const [message, setMessage] = useState();
-  const [translation, setTranslation] = useState(props.translatedText);
-
-  const setField = (value) => {
-    setMessage(value);
-  };
 
   const setTextBubbles = () => {
     if (props.user == "International") {
@@ -51,7 +46,9 @@ function BackgroundCard(props) {
                 : "placeholder"
             }
           />
-          <div>{props.user == "International" ? "Tu:" : "You:"}</div>
+          <div>
+            {props.user == "International" ? "Tu (traducido):" : "You:"}
+          </div>
           <DialogueCard
             user="International"
             content={
@@ -77,7 +74,11 @@ function BackgroundCard(props) {
                 : "placeholder"
             }
           />
-          <div>{props.user == "International" ? "Tu:" : "You:"}</div>
+          <div>
+            {props.user == "International"
+              ? "Tu (traducido):"
+              : "You (translated):"}
+          </div>
           <DialogueCard
             user="International"
             content={
@@ -93,25 +94,43 @@ function BackgroundCard(props) {
 
   return (
     <Figure style={figureStyleBackground}>
-      <h2>{props.user} Student</h2>
-      <h4>
-        Current language:{" "}
-        {props.user == "International" ? "Spanish" : "English"}
-      </h4>
-      <Figure style={figureStyleChat}>{setTextBubbles()}</Figure>
-      <Form>
-        <Form.Group controlId="exampleForm.ControlTextarea1">
-          <Form.Label>Example textarea</Form.Label>
-          <Form.Control as="textarea" rows={3} onChange={props.onNewText} />
-        </Form.Group>
+      <Container>
+        <h2>{props.user} Student</h2>
+        <h4>
+          Current language:{" "}
+          {props.user == "International" ? "Spanish" : "English"}
+        </h4>
+        <Figure style={figureStyleChat}>{setTextBubbles()}</Figure>
+        {props.user == "International" ? (
+          <h5>Escucha tu mensaje traducido: </h5>
+        ) : (
+          <h5>Listen to your translated message: </h5>
+        )}
         <Button
-          variant="primary"
-          type="submit"
-          onClick={props.onTranslateRequest}
+          variant="info"
+          onClick={props.onAudioRequest}
+          disabled={!props.onAudioAvailable}
         >
-          Send
+          Audio
         </Button>
-      </Form>
+        <Form>
+          <Form.Group controlId="exampleForm.ControlTextarea1">
+            <h5>
+              {props.user == "International"
+                ? "Escribe un mensaje:"
+                : "Write a message:"}
+            </h5>
+            <Form.Control as="textarea" rows={3} onChange={props.onNewText} />
+          </Form.Group>
+          <Button
+            variant="primary"
+            type="submit"
+            onClick={props.onTranslateRequest}
+          >
+            Send
+          </Button>
+        </Form>
+      </Container>
     </Figure>
   );
 }
