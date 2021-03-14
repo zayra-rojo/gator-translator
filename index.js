@@ -33,16 +33,13 @@ app.get("/translate", function (req, res) {
   const currentLanguage = req.query.currentLang;
   const targetLanguage = req.query.targetLang;
   const messageToTranslate = req.query.messageToTranslate;
-  console.log("target language=", targetLanguage);
 
   // call google translate api here
   //translateText(messageToTranslate, targetLanguage);
   translateText(messageToTranslate, targetLanguage).then((translatedText) => {
     if (translatedText == 0) return res.sendStatus(404);
 
-    console.log("translated text: ", translatedText);
     convertTextToSpeech(translatedText, targetLanguage);
-    console.log("about to return response to api request...!");
     return res.send(translatedText);
   });
 });
@@ -56,8 +53,38 @@ app.get("/feedback", function (req, res) {
   return res.send(allFeedback);
 });
 
+app.post("/feedback", function (req, res) {
+  let userType = req.body.params.userType;
+  let feedbackType = req.body.params.feedbackType;
+  let feedbackContent = req.body.params.feedbackContent;
+  console.log(
+    "printing all parameters: ",
+    userType,
+    feedbackType,
+    feedbackContent
+  );
+  let rawData = fs.readFileSync(
+    "./client/src/translation-feedback/feedback.json"
+  );
+  let allFeedback = JSON.parse(rawData);
+  if (userType == "International" && feedbackType == "good") {
+    allFeedback.internationalStudentFeedback.good.push(feedbackContent);
+  } else if (userType == "International" && feedbackType == "bad") {
+    allFeedback.internationalStudentFeedback.bad.push(feedbackContent);
+  } else if (userType == "Guide" && feedbackType == "good") {
+    allFeedback.guideStudentFeedback.good.push(feedbackContent);
+  } else if (userType == "Guide" && feedbackType == "bad") {
+    allFeedback.guideStudentFeedback.bad.push(feedbackContent);
+  }
+
+  fs.writeFileSync(
+    "./client/src/translation-feedback/feedback.json",
+    JSON.stringify(allFeedback)
+  );
+  res.sendStatus(200);
+});
+
 const convertTextToSpeech = async (text, targetLanguage) => {
-  console.log("Inside convertTextToSpeech...");
   let langCode;
   if (targetLanguage == "en") langCode = "en-US";
   else langCode = "es-ES";
@@ -77,7 +104,6 @@ const convertTextToSpeech = async (text, targetLanguage) => {
     response.audioContent,
     "binary"
   );
-  console.log("Audio content written to file: output.mp3");
 };
 
 const translateText = async (text, targetLanguage) => {
