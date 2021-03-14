@@ -9,21 +9,21 @@ import Form from "react-bootstrap/Form";
 import "./styles.css";
 
 const figureStyleBackground = {
-  width: "500px",
+  width: "570px",
   // height: "600px",
   borderRadius: "16px",
-  marginRight: "24px",
-  padding: "20px 40px",
+  marginRight: "5px",
+  padding: "15px 20px",
   boxShadow: "5px 8px 24px 5px rgba(208, 216, 243, 0.6)",
   backgroundColor: "rgb(209, 230, 224)",
 };
 const figureStyleChat = {
-  width: "400px",
+  width: "350px",
   // height: "600px",
   borderRadius: "16px",
   marginRight: "24px",
   padding: "10px 20px",
-  boxShadow: "5px 8px 24px 5px rgba(208, 216, 243, 0.6)",
+  boxShadow: "5px 5px 5px 5px rgba(208, 216, 243, 0.6)",
   backgroundColor: "white",
 };
 let guideCardContent = "Hi, do you need directions?";
@@ -36,7 +36,7 @@ function BackgroundCard(props) {
     if (props.user == "International") {
       return (
         <>
-          <div>{props.user == "International" ? "Guia:" : "You:"}</div>
+          <div>{props.user == "International" ? "Guía:" : "You:"}</div>
 
           <DialogueCard
             user="Guide"
@@ -95,31 +95,55 @@ function BackgroundCard(props) {
   return (
     <Figure style={figureStyleBackground}>
       <Container>
-        <h2>{props.user} Student</h2>
-        <h4>
+        <h3>{props.user} Student</h3>
+        <h5>
           Current language:{" "}
           {props.user == "International" ? "Spanish" : "English"}
-        </h4>
-        <Figure style={figureStyleChat}>{setTextBubbles()}</Figure>
-        {props.user == "International" ? (
-          <h5>Escucha tu mensaje traducido: </h5>
-        ) : (
-          <h5>Listen to your translated message: </h5>
-        )}
-        <Button
-          variant="info"
-          onClick={props.onAudioRequest}
-          disabled={!props.onAudioAvailable}
-        >
-          Audio
-        </Button>
+        </h5>
+        <Row>
+          <Col>
+            <Figure style={figureStyleChat}>{setTextBubbles()}</Figure>
+          </Col>
+          <Col>
+            <div>
+              {props.user == "International" ? (
+                <div>Escucha tu mensaje traducido: </div>
+              ) : (
+                <div>Listen to your translated message: </div>
+              )}
+              <Button
+                variant="info"
+                onClick={props.onAudioRequest}
+                disabled={!props.onAudioAvailable}
+              >
+                Audio🔊
+              </Button>
+            </div>
+          </Col>
+        </Row>
+        <div>
+          {props.user == "International" ? (
+            <h6>Califica la traducción de tu guía:</h6>
+          ) : (
+            <h6>Rate your guide's translation:</h6>
+          )}
+          <Row>
+            <Col>
+              <Button variant="success">Good</Button>
+            </Col>
+            <Col md={{ span: 9, offset: 0 }}>
+              <Button variant="danger">Bad</Button>
+            </Col>
+          </Row>{" "}
+        </div>
+        <br />
         <Form>
           <Form.Group controlId="exampleForm.ControlTextarea1">
-            <h5>
+            <h6>
               {props.user == "International"
                 ? "Escribe un mensaje:"
                 : "Write a message:"}
-            </h5>
+            </h6>
             <Form.Control as="textarea" rows={3} onChange={props.onNewText} />
           </Form.Group>
           <Button

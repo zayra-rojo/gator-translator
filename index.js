@@ -45,8 +45,15 @@ app.get("/translate", function (req, res) {
     console.log("about to return response to api request...!");
     return res.send(translatedText);
   });
+});
 
-  // send translated message back
+app.get("/feedback", function (req, res) {
+  let rawdata = fs.readFileSync(
+    "./client/src/translation-feedback/feedback.json"
+  );
+  let allFeedback = JSON.parse(rawdata);
+  console.log("printing all feedback...", allFeedback);
+  return res.send(allFeedback);
 });
 
 const convertTextToSpeech = async (text, targetLanguage) => {

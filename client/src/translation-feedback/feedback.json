@@ -1,0 +1,10 @@
+{
+  "internationalStudentFeedback": {
+    "good": ["Da una izquierda", "Cerca de el estadio."],
+    "bad": ["Ve derecha"]
+  },
+  "guideStudentFeedback": {
+    "good": ["I'm very lost"],
+    "bad": ["The building is fat"]
+  }
+}
