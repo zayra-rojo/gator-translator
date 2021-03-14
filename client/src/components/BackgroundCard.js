@@ -32,7 +32,7 @@ let internationalCardContent = "Yes, how do i get to Chomp It?";
 
 function BackgroundCard(props) {
   const [message, setMessage] = useState();
-
+  const [feedbackSent, setFeedbackSent] = useState(false);
   const setTextBubbles = () => {
     if (props.user == "International") {
       return (
@@ -44,7 +44,7 @@ function BackgroundCard(props) {
             content={
               props.translatedTextGuide
                 ? props.translatedTextGuide
-                : "placeholder"
+                : "                 "
             }
           />
           <div>
@@ -55,7 +55,7 @@ function BackgroundCard(props) {
             content={
               props.translatedTextInternational
                 ? props.translatedTextInternational
-                : "placeholder"
+                : "                 "
             }
           />
         </>
@@ -72,7 +72,7 @@ function BackgroundCard(props) {
             content={
               props.translatedTextInternational
                 ? props.translatedTextInternational
-                : "placeholder"
+                : "                 "
             }
           />
           <div>
@@ -85,7 +85,7 @@ function BackgroundCard(props) {
             content={
               props.translatedTextGuide
                 ? props.translatedTextGuide
-                : "placeholder"
+                : "                 "
             }
           />
         </>
@@ -107,11 +107,10 @@ function BackgroundCard(props) {
       feedbackType: "good",
       feedbackContent: feedbackContent,
     };
-    console.log("inside handleGoodFeedback, printing params=", feedbackParams);
     const result = await axios
       .post("http://localhost:8080/feedback", { params: feedbackParams })
       .then((response) => {
-        console.log("inside handleGoodFeedback...success!");
+        setFeedbackSent(true);
       })
       .catch((error) => {
         console.log("error inside handleGoodFeedback!!, printing...", error);
@@ -131,11 +130,11 @@ function BackgroundCard(props) {
       feedbackType: "bad",
       feedbackContent: feedbackContent,
     };
-    console.log("inside handleGoodFeedback, printing params=", feedbackParams);
+
     const result = await axios
       .post("http://localhost:8080/feedback", { params: feedbackParams })
       .then((response) => {
-        console.log("inside handleGoodFeedback...success!");
+        setFeedbackSent(true);
       })
       .catch((error) => {
         console.log("error inside handleGoodFeedback!!, printing...", error);
@@ -146,8 +145,9 @@ function BackgroundCard(props) {
       <Container>
         <h3>{props.user} Student</h3>
         <h5>
-          Current language:{" "}
-          {props.user == "International" ? "Spanish" : "English"}
+          {props.user == "International"
+            ? "Idioma seleccionado: Español"
+            : "Selected language: English"}
         </h5>
         <Row>
           <Col>
@@ -204,7 +204,7 @@ function BackgroundCard(props) {
             type="submit"
             onClick={props.onTranslateRequest}
           >
-            Send
+            {props.user == "International" ? <>Envia</> : <>Send</>}
           </Button>
         </Form>
       </Container>

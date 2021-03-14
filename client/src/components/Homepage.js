@@ -5,6 +5,7 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+
 import "./styles.css";
 import BackgroundCard from "./BackgroundCard";
 import audioOutput from "../audiofiles/output.mp3";
@@ -17,7 +18,7 @@ function Homepage() {
   ] = useState();
   const [translatedMessageGuide, setTranslatedMessageGuide] = useState();
   const [audioAvailable, setAudioAvailable] = useState(false);
-  // const [languageOfAudio, setLanguageOfAudio] = useState();
+  const [translationSent, setTranslationSent] = useState();
 
   async function handleTranslationRequestInternational(evt) {
     evt.preventDefault();
@@ -109,6 +110,14 @@ function Homepage() {
             onAudioRequest={handleClickedAudioButton}
             onAudioAvailable={audioAvailable}
           />
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+          <h6>
+            Have any feedback for us? Click this button to fill out a survey!
+          </h6>
+          <Button>Go to feedback survey</Button>
         </Col>
       </Row>
     </Container>
