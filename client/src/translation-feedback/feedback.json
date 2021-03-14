@@ -1,1 +1,10 @@
-{"internationalStudentFeedback":{"good":["Da una izquierda","Cerca de el estadio.","ve dos arboles","¿Estás lejos del estadio?","¿Necesitas ayuda?","Ok, puedo ayudar!","No puedo verte","No puedo creer esto","No puedo",null],"bad":["Ve derecha","esto mal","tu bien","¡No te preocupes! Puedo ayudar. ¿Dónde estás ahora mismo?",null,"no puedo hacer esto"]},"guideStudentFeedback":{"good":["I'm very lost","I need to get to Rawlings.","I can not find it.","Me neither!",null],"bad":["The building is fat","i close am","I have no idea how to get to the bus station!",null]}}
+{
+  "internationalStudentFeedback": {
+    "good": ["Da una izquierda", null],
+    "bad": ["Ve derecha"]
+  },
+  "guideStudentFeedback": {
+    "good": ["I'm very lost"],
+    "bad": ["The building is fat"]
+  }
+}
