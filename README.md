@@ -10,7 +10,8 @@ Both use the same service account.
 To add your service account:
 
 1. Create a .env file in the root directory (not /client)
-2. Create a new environment variable called GOOGLE_TRANSLATE_CREDENTIALS and set it to the contents of the service account json (remove indentation as necessary so it's all in one line)
+2. Create a new environment variable called GOOGLE_TRANSLATE_CREDENTIALS and set it equal to the contents of the service account json (remove indentation as necessary so it's all in one line)
+3. Create a new environment variable called project_id. Set it equal to your project id (given in service account json and also in google account)
 
 ### `npm start`
 
