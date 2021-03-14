@@ -1,10 +1,25 @@
 {
   "internationalStudentFeedback": {
-    "good": ["Da una izquierda", "Cerca de el estadio."],
-    "bad": ["Ve derecha"]
+    "good": [
+      "Da una izquierda",
+      "Cerca de el estadio.",
+      "ve dos arboles",
+      "¿Estás lejos del estadio?",
+      "¿Necesitas ayuda?"
+    ],
+    "bad": [
+      "Ve derecha",
+      "esto mal",
+      "tu bien",
+      "¡No te preocupes! Puedo ayudar. ¿Dónde estás ahora mismo?"
+    ]
   },
   "guideStudentFeedback": {
-    "good": ["I'm very lost"],
-    "bad": ["The building is fat"]
+    "good": ["I'm very lost", "I need to get to Rawlings."],
+    "bad": [
+      "The building is fat",
+      "i close am",
+      "I have no idea how to get to the bus station!"
+    ]
   }
 }

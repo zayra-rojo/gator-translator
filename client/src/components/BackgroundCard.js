@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
@@ -92,6 +93,54 @@ function BackgroundCard(props) {
     }
   };
 
+  const handleGoodFeedback = async (evt) => {
+    evt.preventDefault();
+
+    let feedbackContent;
+    if (props.user == "International")
+      feedbackContent = props.translatedTextGuide;
+    else if (props.user == "Guide") {
+      feedbackContent = props.translatedTextInternational;
+    }
+    const feedbackParams = {
+      userType: props.user,
+      feedbackType: "good",
+      feedbackContent: feedbackContent,
+    };
+    console.log("inside handleGoodFeedback, printing params=", feedbackParams);
+    const result = await axios
+      .post("http://localhost:8080/feedback", { params: feedbackParams })
+      .then((response) => {
+        console.log("inside handleGoodFeedback...success!");
+      })
+      .catch((error) => {
+        console.log("error inside handleGoodFeedback!!, printing...", error);
+      });
+  };
+  const handleBadFeedback = async (evt) => {
+    evt.preventDefault();
+
+    let feedbackContent;
+    if (props.user == "International")
+      feedbackContent = props.translatedTextGuide;
+    else if (props.user == "Guide") {
+      feedbackContent = props.translatedTextInternational;
+    }
+    const feedbackParams = {
+      userType: props.user,
+      feedbackType: "bad",
+      feedbackContent: feedbackContent,
+    };
+    console.log("inside handleGoodFeedback, printing params=", feedbackParams);
+    const result = await axios
+      .post("http://localhost:8080/feedback", { params: feedbackParams })
+      .then((response) => {
+        console.log("inside handleGoodFeedback...success!");
+      })
+      .catch((error) => {
+        console.log("error inside handleGoodFeedback!!, printing...", error);
+      });
+  };
   return (
     <Figure style={figureStyleBackground}>
       <Container>
@@ -129,10 +178,14 @@ function BackgroundCard(props) {
           )}
           <Row>
             <Col>
-              <Button variant="success">Good</Button>
+              <Button onClick={handleGoodFeedback} variant="success">
+                Good
+              </Button>
             </Col>
             <Col md={{ span: 9, offset: 0 }}>
-              <Button variant="danger">Bad</Button>
+              <Button onClick={handleBadFeedback} variant="danger">
+                Bad
+              </Button>
             </Col>
           </Row>{" "}
         </div>
