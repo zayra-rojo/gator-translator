@@ -1,7 +1,7 @@
 # Instructions for setting up Gator-Translator
 
-Clone this repository
-Run `npm i`
+1. Clone this repository
+2. Run `npm i`
 
 ## APIs
 
