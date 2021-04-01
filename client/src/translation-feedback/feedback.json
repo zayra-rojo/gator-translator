@@ -1,10 +1,7 @@
 {
   "internationalStudentFeedback": {
-    "good": ["Da una izquierda", null],
-    "bad": ["Ve derecha"]
+    "good": [],
+    "bad": []
   },
-  "guideStudentFeedback": {
-    "good": ["I'm very lost"],
-    "bad": ["The building is fat"]
-  }
+  "guideStudentFeedback": { "good": [], "bad": [] }
 }

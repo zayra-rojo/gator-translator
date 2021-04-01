@@ -117,7 +117,15 @@ function Homepage() {
           <h6>
             Have any feedback for us? Click this button to fill out a survey!
           </h6>
-          <Button>Go to feedback survey</Button>
+          <Button
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href =
+                "https://docs.google.com/forms/d/e/1FAIpQLSduJw2Ybt071HXWcIqcj2mQBdnA4iNFQhVUJtgZLr1141IaxQ/viewform";
+            }}
+          >
+            Go to feedback survey
+          </Button>
         </Col>
       </Row>
     </Container>
